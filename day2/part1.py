@@ -3,7 +3,7 @@ def main():
     checksum = 0
     for row in sheet:
         row = [int(x) for x in row]
-        checksum = checksum + (max(row) - min(row))
+        checksum += (max(row) - min(row))
     print(checksum)
 
 if __name__ == "__main__":
