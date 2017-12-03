@@ -34,6 +34,5 @@ def main():
 
     print(manhattan_distance)
 
-
 if __name__ == '__main__':
     main()
