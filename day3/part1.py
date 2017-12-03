@@ -15,10 +15,12 @@ def get_ring_index(input_number):
     return (ring_index, start)
 
 def get_anchor_digits(start, ring_index):
+    step = ring_index * 2
+
     right = start + (ring_index - 1)
-    top = right + (2*ring_index)
-    left = top + (2*ring_index)
-    bottom = left + (2*ring_index)
+    top = right + step
+    left = top + step
+    bottom = left + step
 
     return [right, top, left, bottom]
 
