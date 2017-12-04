@@ -1,16 +1,8 @@
-from itertools import permutations
-
-def get_permutations(word):
-    return set([''.join(p) for p in permutations(word)])
-
 def is_valid_passphrase(phrase):
-    words = phrase.split(' ')
-    for i in range(0, len(words)):
-        permutations = get_permutations(words[i])
-        other_words = set(words[i+1:len(words)])
-        if len(permutations & other_words) > 0:
-            return False
-    return True
+    sorted_words = [''.join(sorted(w)) for w in phrase.split(' ')]
+    if len(set(sorted_words)) == len(sorted_words):
+        return True
+    return False
 
 def main():
     passphrases = [line.rstrip() for line in open('input.txt', 'r').readlines()]
