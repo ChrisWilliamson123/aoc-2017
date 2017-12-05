@@ -5,10 +5,8 @@ def main():
 	while i < len(instructions):
 		old = i
 		i += instructions[i]
-		if instructions[old] >= 3:
-			instructions[old] -=1
-		else:
-			instructions[old] += 1
+		change = -1 if instructions[old] >= 3 else 1
+		instructions[old] += change
 		steps += 1
 
 	print(steps)
