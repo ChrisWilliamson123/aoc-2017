@@ -1,18 +1,12 @@
-def get_busiest_bank(banks):
-    largestAmount = max(banks)
-    return (banks.index(largestAmount), largestAmount)
-
-def get_next_index(banks, current_index):
-    if current_index == (len(banks) - 1):
-        return 0
-    return current_index + 1
-
 def reallocate(banks):
-    busiest_index, size = get_busiest_bank(banks)
-    banks[busiest_index] = 0
-    current_index = busiest_index
-    for i in range(0, size):
-        current_index = get_next_index(banks, current_index)
+    largest_bank_size = max(banks)
+    largest_bank_index = banks.index(largest_bank_size)
+
+    banks[largest_bank_index] = 0
+    current_index = largest_bank_index
+
+    for i in range(0, largest_bank_size):
+        current_index = current_index + 1 if current_index < (len(banks)-1) else 0
         banks[current_index] += 1
 
     return banks
