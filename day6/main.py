@@ -1,10 +1,3 @@
-def includes(configs, current_bank):
-    try:
-        configs.index(current_bank)
-        return True
-    except:
-        return False
-
 def get_busiest_bank(banks):
     largestAmount = max(banks)
     return (banks.index(largestAmount), largestAmount)
@@ -26,22 +19,16 @@ def reallocate(banks):
 
 def main():
     banks = [int(block) for block in open('input.txt', 'r').read().split('\t')]
-    seen_configurations = [list(banks)]
-
-    done = False
+    seen_configurations = {}
     reallocations = 0
-    
-    while not done:
+
+    while str(banks) not in seen_configurations:
+        seen_configurations[str(banks)] = reallocations
         banks = reallocate(banks)
         reallocations += 1
-
-        if includes(seen_configurations, banks):
-            done = True
-        else:
-            seen_configurations.append(list(banks))
     
-    print(reallocations)
-
+    print('Reallocations: %d' % reallocations)
+    print('Reallocations between matched banks: %d' % (reallocations - seen_configurations[str(banks)]))
 
 if __name__ == '__main__':
     main()
