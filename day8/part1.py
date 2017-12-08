@@ -4,22 +4,16 @@ def should_execute(condition, registers):
 
 def parse_instruction(i):
     split = i.split(' ')
-    target = split[0]
-    change_amount = int(split[2])
     change_multiplier = 1 if split[1] == 'inc' else -1
-    cond = split[4:]
-    return [target, change_amount * change_multiplier, cond]
+    return (split[0], int(split[2]) * change_multiplier, split[4:])
 
 def main():
     registers = {}
     instructions = [line.rstrip() for line in open('input.txt', 'r').readlines()]
     
     for i in instructions:
-        i = parse_instruction(i)
-        target = i[0]
-        amount = i[1]
-        condition = i[2]
-        if should_execute(condition, registers):
+        (target, amount, cond) = parse_instruction(i)
+        if should_execute(cond, registers):
             registers[target] = registers[target] + amount if target in registers.keys() else amount
 
     print(registers[max(registers, key=registers.get)])
