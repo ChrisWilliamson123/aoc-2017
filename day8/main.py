@@ -9,14 +9,18 @@ def parse_instruction(i):
 
 def main():
     registers = {}
+    max_value = 0
     instructions = [line.rstrip() for line in open('input.txt', 'r').readlines()]
     
     for i in instructions:
         (target, amount, cond) = parse_instruction(i)
         if should_execute(cond, registers):
             registers[target] = registers[target] + amount if target in registers.keys() else amount
+            if registers[target] > max_value:
+                max_value = registers[target]
 
     print(registers[max(registers, key=registers.get)])
+    print(max_value)
 
 if __name__ == '__main__':
     main()
