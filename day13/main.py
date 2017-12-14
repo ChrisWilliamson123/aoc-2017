@@ -10,10 +10,9 @@ def main():
         depths_to_ranges[int(line[0])] = int(line[1])
     
     severity = 0
-    for depth in depths_to_ranges:
-        this_range = depths_to_ranges[depth]
-        if is_caught(depth, this_range):
-            severity += (depth * this_range) 
+    for depth, range in depths_to_ranges.items():
+        if is_caught(depth, range):
+            severity += (depth * range) 
 
     print(severity)
 
